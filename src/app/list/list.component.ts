@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Student } from '../student';
 import { StudentService } from '../aluno.service';
 
@@ -7,13 +7,19 @@ import { StudentService } from '../aluno.service';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']
 })
-export class ListComponent {
+export class ListComponent implements OnInit {
   studentList: Student[] = [];
   studentService: StudentService = inject(StudentService);
 
-  constructor() {
+  constructor() { }
+
+  ngOnInit() {
     this.studentService.getAllStudents().then((studentList: Student[]) => {
       this.studentList = studentList;
+    });
+
+    this.studentService.getChanges().subscribe(item => {
+      this.studentList = item;
     });
   }
   
