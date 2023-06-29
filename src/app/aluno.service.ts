@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Student } from './student';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,7 @@ export class StudentService {
   url = 'https://6467a872e99f0ba0a814b5ff.mockapi.io/api/Pessoas';
 
   private storage: Storage;
+  private storageSubject = new Subject<any>();
 
   constructor() {
     this.storage = window.localStorage;
@@ -38,12 +40,15 @@ export class StudentService {
     return await data.json() ?? {};
   }
 
-  setStudent(students: Student[]): boolean {
+  setStudent(students: Student[]): void {
     if (this.storage) {
       this.storage.setItem("Students", JSON.stringify(students));
-      return true;
+      this.storageSubject.next(students);
     }
-    return false;
+  }
+
+  getChanges(): Observable<any> {
+    return this.storageSubject.asObservable();
   }
 
 }
