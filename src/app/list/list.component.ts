@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Student } from '../student';
-import { StudentService } from '../aluno.service';
+import { StudentService } from '../student.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { StudentService } from '../aluno.service';
+import { StudentService } from '../student.service';
 import { Student } from '../student';
 import { DatePipe } from '@angular/common';
 
