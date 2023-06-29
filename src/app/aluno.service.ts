@@ -35,11 +35,6 @@ export class StudentService {
     })
   }
 
-  async getStudentById(id: number): Promise<Student | undefined> {
-    const data = await fetch(`${this.url}/${id}`);
-    return await data.json() ?? {};
-  }
-
   setStudent(students: Student[]): void {
     if (this.storage) {
       this.storage.setItem("Students", JSON.stringify(students));
@@ -55,6 +50,11 @@ export class StudentService {
     this.getAllStudents().then((list: Student[]) => {
       this.setStudent((list.filter(student => Number(student.PessoaId) !== Number(PessoaId))))
     });
+  }
+
+  async getStudentById(PessoaId: number): Promise<Student[]> {
+    const list = await this.getAllStudents();
+    return list.filter(student => Number(student.PessoaId) === Number(PessoaId));
   }
 
 }
