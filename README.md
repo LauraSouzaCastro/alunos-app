@@ -1,5 +1,11 @@
 # AlunosApp
 
+CRUD de alunos.
+Primeiro clone o repositótio na sua máquina.
+Depois digite no terminal `npm install`
+Agora digite `ng serve` e acesse no navegador `http://localhost:4200/`.
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.2.
 
 ## Development server
