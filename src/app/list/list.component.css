@@ -1,3 +1,5 @@
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
+
 .table-container{
     margin-top: 20px;
     overflow-x: auto;
@@ -9,12 +11,12 @@
 .list {
     min-width: 290px;
     display: grid;
-    grid-template-columns: 1fr 3fr 3fr 3fr 1fr;
+    grid-template-columns: 3fr 1fr 5fr 5fr 5fr 2fr 3fr;
 }
 
 .title {
     font-weight: 700;
-    background-color: #2196f3;
+    background-color: #1d2440;
     color: #fff;
 }
 
@@ -23,6 +25,16 @@
     padding: 1vh;
     font-size: 2.5vh;
     overflow: auto;
+    margin: auto 0;
+}
+
+.i{
+    margin: auto;
+}
+
+i{
+    margin: auto;
+    font-size: 2.5vh;
 }
 
 @media screen and (min-width: 500px) and (max-width: 700px){
@@ -30,11 +42,17 @@
         padding: 0.6vh;
         font-size: small;
     }
+    i{
+        font-size: small;
+    }
 }
 
 @media screen and (max-width: 499px){
     .item{
         padding: 0.4vh;
+        font-size: small;
+    }
+    i{
         font-size: small;
     }
 }

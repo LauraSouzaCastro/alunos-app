@@ -1,6 +1,6 @@
 export interface Student {
     Nome: string,
-    DataNascimento: Date,
+    DataNascimento: string,
     Sexo: string,
     Email: string,
     PessoaId: number,
