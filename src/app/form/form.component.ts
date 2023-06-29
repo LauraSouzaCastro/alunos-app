@@ -46,6 +46,12 @@ export class FormComponent {
         console.log(error)
       }
       this.studentService.setStudent(studentList);
+      this.applyForm.patchValue({
+        Nome:'',
+        Email: '',
+        DataNascimento: '',
+        Sexo: ''
+      });
     });
   }
 
