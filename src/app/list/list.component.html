@@ -1,0 +1,16 @@
+<div class="table-container">
+    <div class="list title">
+        <div class="item">Id</div>
+        <div class="item">Nome</div>
+        <div class="item">Email</div>
+        <div class="item">Data de Nascimento</div>
+        <div class="item">Sexo</div>
+    </div>
+    <div class="list" *ngFor="let student of studentList">
+        <div class="item">{{student.PessoaId}}</div>
+        <div class="item">{{student.Nome}}</div>
+        <div class="item">{{student.Email}}</div>
+        <div class="item">{{student.DataNascimento}}</div>
+        <div class="item">{{student.Sexo}}</div>
+    </div>
+</div>
