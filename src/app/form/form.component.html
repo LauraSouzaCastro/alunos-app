@@ -1,0 +1,26 @@
+<form [formGroup]="applyForm" (submit)="submitApplication()">
+    <label>
+        <p>Nome</p>
+        <input required type="text" formControlName="Nome">
+    </label>
+    <label>
+        <p>Email</p>
+        <input required type="email" formControlName="Email">
+    </label>
+    <label>
+        <p>Data de Nascimento</p>
+        <input required type="date" formControlName="DataNascimento">
+    </label>
+    <label>
+        <p>Sexo</p>
+        <div>
+            <span>
+                Masculino: <input type="radio" value="M" formControlName="Sexo"/>
+            </span>
+            <span>
+               Feminino: <input type="radio" value="F" formControlName="Sexo"/> 
+            </span>
+        </div>
+    </label>
+    <button type="submit">Salvar</button>
+</form>
