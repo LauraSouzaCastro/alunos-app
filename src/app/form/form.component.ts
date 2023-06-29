@@ -29,10 +29,12 @@ export class FormComponent {
 
       if(studentList.length && Number(studentList[studentList.length - 1].PessoaId)) lastId = Number(studentList[studentList.length - 1].PessoaId);
       try {
+        if(!this.applyForm.value.Nome || !this.applyForm.value.Email || !this.applyForm.value.DataNascimento || !this.applyForm.value.Sexo) throw new Error('Todos os dados são obrigatórios');
+        
         const dataNascimento = new Date(this.applyForm.value.DataNascimento ?? '');
         dataNascimento.setMinutes(dataNascimento.getMinutes() + dataNascimento.getTimezoneOffset());
         const dataFormatada = this.datePipe.transform(dataNascimento, 'dd-MM-yyyy');
-
+        
         studentList.push({
           Nome: this.applyForm.value.Nome ?? '',
           Email: this.applyForm.value.Email ?? '',
@@ -41,10 +43,8 @@ export class FormComponent {
           PessoaId: lastId + 1
         });
       } catch (error) {
-        console.log("r")
+        console.log(error)
       }
-      
-
       this.studentService.setStudent(studentList);
     });
   }

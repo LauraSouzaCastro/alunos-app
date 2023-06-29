@@ -8,13 +8,29 @@
         <div class="item">Sexo</div>
         <div class="item i">Apagar</div>
     </div>
-    <div class="list" *ngFor="let student of studentList">
-        <i class="fa fa-pencil-alt" style="color: #33454e;"></i>
+    <form [formGroup]="applyForm" class="list" *ngFor="let student of studentList">
+        <i class="fa fa-pencil-alt" style="color: #33454e;" (click)="editStudent(student.PessoaId)"></i>
         <div class="item">{{student.PessoaId}}</div>
-        <div class="item">{{student.Nome}}</div>
-        <div class="item">{{student.Email}}</div>
-        <div class="item">{{student.DataNascimento}}</div>
-        <div class="item">{{student.Sexo}}</div>
+
+        <div *ngIf="!isEditMode(student.PessoaId)" class="item">{{student.Nome}}</div>
+        <input *ngIf="isEditMode(student.PessoaId)" required type="text" formControlName="Nome" class="item"  (keydown)="onKeyPressed($event)">
+
+        <div *ngIf="!isEditMode(student.PessoaId)" class="item">{{student.Email}}</div>
+        <input *ngIf="isEditMode(student.PessoaId)" required type="email" formControlName="Email" class="item"  (keydown)="onKeyPressed($event)">
+
+        <div *ngIf="!isEditMode(student.PessoaId)" class="item">{{student.DataNascimento}}</div>
+        <input *ngIf="isEditMode(student.PessoaId)" required type="date" formControlName="DataNascimento" class="item"  (keydown)="onKeyPressed($event)">
+
+        <div *ngIf="!isEditMode(student.PessoaId)" class="item">{{student.Sexo}}</div>
+        <div *ngIf="isEditMode(student.PessoaId)" class="item">
+            <span>
+                M: <input type="radio" value="M" formControlName="Sexo" class="radio"  (keydown)="onKeyPressed($event)"/>
+            </span>
+            <span>
+                F: <input type="radio" value="F" formControlName="Sexo" class="radio"  (keydown)="onKeyPressed($event)"/>
+            </span>
+        </div>
+
         <i class="fa fa-trash" style="color: #9b0800;" (click)="deleteStudent(student.PessoaId)"></i>
-    </div>
+    </form>
 </div>
