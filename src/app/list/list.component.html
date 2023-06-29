@@ -1,16 +1,20 @@
 <div class="table-container">
     <div class="list title">
+        <div class="item i">Editar</div>
         <div class="item">Id</div>
         <div class="item">Nome</div>
         <div class="item">Email</div>
         <div class="item">Data de Nascimento</div>
         <div class="item">Sexo</div>
+        <div class="item i">Apagar</div>
     </div>
     <div class="list" *ngFor="let student of studentList">
+        <i class="fa fa-pencil-alt" style="color: #33454e;"></i>
         <div class="item">{{student.PessoaId}}</div>
         <div class="item">{{student.Nome}}</div>
         <div class="item">{{student.Email}}</div>
         <div class="item">{{student.DataNascimento}}</div>
         <div class="item">{{student.Sexo}}</div>
+        <i class="fa fa-trash" style="color: #9b0800;" (click)="deleteStudent(student.PessoaId)"></i>
     </div>
 </div>

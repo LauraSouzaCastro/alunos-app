@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { StudentService } from '../aluno.service';
 import { Student } from '../student';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-form',
@@ -19,26 +20,33 @@ export class FormComponent {
     Sexo: new FormControl('')
   });
 
-  async submitApplication() {
-    var response = await this.studentService.getAllStudents().then((studentList: Student[]) => {
+  constructor(private datePipe: DatePipe) { }
+
+  async createStudent() {
+    await this.studentService.getAllStudents().then((studentList: Student[]) => {
 
       var lastId: number = 0
 
-      if(studentList.length) lastId = Number(studentList[studentList.length - 1].PessoaId);
+      if(studentList.length && Number(studentList[studentList.length - 1].PessoaId)) lastId = Number(studentList[studentList.length - 1].PessoaId);
+      try {
+        const dataNascimento = new Date(this.applyForm.value.DataNascimento ?? '');
+        dataNascimento.setMinutes(dataNascimento.getMinutes() + dataNascimento.getTimezoneOffset());
+        const dataFormatada = this.datePipe.transform(dataNascimento, 'dd-MM-yyyy');
+
+        studentList.push({
+          Nome: this.applyForm.value.Nome ?? '',
+          Email: this.applyForm.value.Email ?? '',
+          DataNascimento: dataFormatada ?? '',
+          Sexo: this.applyForm.value.Sexo ?? '',
+          PessoaId: lastId + 1
+        });
+      } catch (error) {
+        console.log("r")
+      }
       
-      studentList.push({
-        Nome: this.applyForm.value.Nome ?? '',
-        Email: this.applyForm.value.Email ?? '',
-        DataNascimento: new Date(this.applyForm.value.DataNascimento ?? ''),
-        Sexo: this.applyForm.value.Sexo ?? '',
-        PessoaId: lastId + 1
-      });
 
-      return this.studentService.setStudent(studentList);
+      this.studentService.setStudent(studentList);
     });
-
-
   }
-
 
 }

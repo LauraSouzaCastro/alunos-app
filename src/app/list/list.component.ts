@@ -22,5 +22,9 @@ export class ListComponent implements OnInit {
       this.studentList = item;
     });
   }
+
+  deleteStudent(PessoaId: number) {
+    this.studentService.deleteStudent(PessoaId);
+  }
   
 }

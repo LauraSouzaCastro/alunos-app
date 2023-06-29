@@ -31,7 +31,7 @@ export class StudentService {
       return JSON.parse(this.storage.getItem("Students") ?? '[]');
     }
     return this.getAllStudentsAPI().then((studentList: Student[]) => {
-       return studentList;
+      return studentList;
     })
   }
 
@@ -49,6 +49,12 @@ export class StudentService {
 
   getChanges(): Observable<any> {
     return this.storageSubject.asObservable();
+  }
+
+  deleteStudent(PessoaId: number): void {
+    this.getAllStudents().then((list: Student[]) => {
+      this.setStudent((list.filter(student => Number(student.PessoaId) !== Number(PessoaId))))
+    });
   }
 
 }
